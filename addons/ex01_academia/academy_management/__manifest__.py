@@ -2,7 +2,7 @@
     'name': "Academy Management",
     'version': '1.0',
     'category': 'Education',
-    'summary': 'Module for academy management',
+    'summary': 'Módulo Gestor Academia',
     'description': """
         Academy Management Module
         =========================
