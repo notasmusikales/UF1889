@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="demo_student_1" model="academy.student">
+        <field name="name">John Doe</field>
+        <field name="email">john.doe@example.com</field>
+        <field name="phone">+1234567890</field>
+    </record>
+
+    <record id="demo_student_2" model="academy.student">
+        <field name="name">Jane Smith</field>
+        <field name="email">jane.smith@example.com</field>
+        <field name="phone">+0987654321</field>
+    </record>
+
+    <record id="demo_course_1" model="academy.course">
+        <field name="name">Python Programming</field>
+        <field name="description">Introduction to Python programming</field>
+        <field name="duration">40</field>
+        <field name="price">299.99</field>
+    </record>
+
+    <record id="demo_course_2" model="academy.course">
+        <field name="name">Web Development</field>
+        <field name="description">Full stack web development course</field>
+        <field name="duration">60</field>
+        <field name="price">499.99</field>
+    </record>
+</odoo>

@@ -15,9 +15,6 @@
         'data/academy_data.xml',
         'views/academy_views.xml',
     ],
-    'demo': [
-        'demo/academy_demo.xml',
-    ],
     'installable': True,
     'application': True,
     'auto_install': False,

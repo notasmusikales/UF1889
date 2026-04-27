@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_academy_manager" model="res.groups">
+        <field name="name">Academy Manager</field>
+        <field name="comment">Can manage academy students, courses and enrollments</field>
+    </record>
+
+    <record id="group_academy_user" model="res.groups">
+        <field name="name">Academy User</field>
+        <field name="comment">Can view academy data</field>
+    </record>
+</odoo>
