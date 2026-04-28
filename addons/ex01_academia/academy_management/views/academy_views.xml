@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="view_academy_student_tree" model="ir.ui.view">
+        <field name="name">academy.student.tree</field>
+        <field name="model">academy.student</field>
+        <field name="arch" type="xml">
+            <list string="Students">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="state"/>
+                <field name="tutoring_count"/>
+                <field name="last_tutoring_date"/>
+            </list>
+        </field>
+    </record>
+
     <record id="view_academy_student_form" model="ir.ui.view">
         <field name="name">academy.student.form</field>
         <field name="model">academy.student</field>
@@ -7,253 +21,16 @@
             <form string="Student">
                 <sheet>
                     <group>
-                        <group>
-                            <field name="name"/>
-                            <field name="email"/>
-                        </group>
-                        <group>
-                            <field name="phone"/>
-                            <field name="birth_date"/>
-                        </group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="state"/>
                     </group>
-                    <group>
-                        <field name="academic_state"/>
-                        <field name="active"/>
+                    <group string="Tutoring Statistics">
+                        <field name="tutoring_count"/>
+                        <field name="last_tutoring_date"/>
                     </group>
-                    <notebook>
-                        <page string="Tutoring Sessions">
-                            <field name="tutoring_ids"/>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="view_academy_student_tree" model="ir.ui.view">
-        <field name="name">academy.student.tree</field>
-        <field name="model">academy.student</field>
-        <field name="type">list</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="email"/>
-                <field name="tutoring_count"/>
-                <field name="academic_state"/>
-            </list>
-        </field>
-    </record>
-
-    <record id="view_academy_student_search" model="ir.ui.view">
-        <field name="name">academy.student.search</field>
-        <field name="model">academy.student</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="name"/>
-                <field name="email"/>
-                <field name="academic_state"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="action_academy_student" model="ir.actions.act_window">
-        <field name="name">Students</field>
-        <field name="res_model">academy.student</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-    <record id="view_academy_course_form" model="ir.ui.view">
-        <field name="name">academy.course.form</field>
-        <field name="model">academy.course</field>
-        <field name="arch" type="xml">
-            <form string="Course">
-                <sheet>
-                    <group>
-                        <group>
-                            <field name="name"/>
-                            <field name="instructor_id"/>
-                        </group>
-                        <group>
-                            <field name="duration"/>
-                            <field name="price"/>
-                        </group>
-                    </group>
-                    <group>
-                        <field name="description"/>
-                    </group>
-                    <group>
-                        <field name="active"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="view_academy_course_tree" model="ir.ui.view">
-        <field name="name">academy.course.tree</field>
-        <field name="model">academy.course</field>
-        <field name="type">list</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="instructor_id"/>
-                <field name="duration"/>
-                <field name="price"/>
-            </list>
-        </field>
-    </record>
-
-    <record id="view_academy_course_search" model="ir.ui.view">
-        <field name="name">academy.course.search</field>
-        <field name="model">academy.course</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="name"/>
-                <field name="instructor_id"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="action_academy_course" model="ir.actions.act_window">
-        <field name="name">Courses</field>
-        <field name="res_model">academy.course</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-    <record id="view_academy_enrollment_form" model="ir.ui.view">
-        <field name="name">academy.enrollment.form</field>
-        <field name="model">academy.enrollment</field>
-        <field name="arch" type="xml">
-            <form string="Enrollment">
-                <sheet>
-                    <group>
-                        <group>
-                            <field name="student_id"/>
-                            <field name="enrollment_date"/>
-                        </group>
-                        <group>
-                            <field name="course_id"/>
-                            <field name="state"/>
-                        </group>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="view_academy_enrollment_tree" model="ir.ui.view">
-        <field name="name">academy.enrollment.tree</field>
-        <field name="model">academy.enrollment</field>
-        <field name="type">list</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="student_id"/>
-                <field name="course_id"/>
-                <field name="enrollment_date"/>
-                <field name="state"/>
-            </list>
-        </field>
-    </record>
-
-    <record id="view_academy_enrollment_search" model="ir.ui.view">
-        <field name="name">academy.enrollment.search</field>
-        <field name="model">academy.enrollment</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="student_id"/>
-                <field name="course_id"/>
-                <field name="state"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="action_academy_enrollment" model="ir.actions.act_window">
-        <field name="name">Enrollments</field>
-        <field name="res_model">academy.enrollment</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-    <record id="view_academy_teacher_form" model="ir.ui.view">
-        <field name="name">academy.teacher.form</field>
-        <field name="model">academy.teacher</field>
-        <field name="arch" type="xml">
-            <form string="Teacher">
-                <sheet>
-                    <group>
-                        <group>
-                            <field name="name"/>
-                            <field name="email"/>
-                        </group>
-                        <group>
-                            <field name="phone"/>
-                            <field name="specialty"/>
-                        </group>
-                    </group>
-                    <group>
-                        <field name="active"/>
-                    </group>
-                    <notebook>
-                        <page string="Courses">
-                            <field name="course_ids"/>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
-    <record id="view_academy_teacher_tree" model="ir.ui.view">
-        <field name="name">academy.teacher.tree</field>
-        <field name="model">academy.teacher</field>
-        <field name="type">list</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="email"/>
-                <field name="phone"/>
-                <field name="specialty"/>
-            </list>
-        </field>
-    </record>
-
-    <record id="view_academy_teacher_search" model="ir.ui.view">
-        <field name="name">academy.teacher.search</field>
-        <field name="model">academy.teacher</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="name"/>
-                <field name="email"/>
-                <field name="specialty"/>
-            </search>
-        </field>
-    </record>
-
-    <record id="action_academy_teacher" model="ir.actions.act_window">
-        <field name="name">Teachers</field>
-        <field name="res_model">academy.teacher</field>
-        <field name="view_mode">list,form</field>
-    </record>
-
-    <record id="view_academy_tutoring_form" model="ir.ui.view">
-        <field name="name">academy.tutoring.form</field>
-        <field name="model">academy.tutoring</field>
-        <field name="arch" type="xml">
-            <form string="Tutoring">
-                <sheet>
-                    <group>
-                        <group>
-                            <field name="subject"/>
-                            <field name="student_id"/>
-                        </group>
-                        <group>
-                            <field name="session_date"/>
-                        </group>
-                    </group>
-                    <group>
-                        <field name="notes"/>
-                    </group>
-                    <group>
-                        <field name="active"/>
+                    <group string="Tutorings">
+                        <field name="tutoring_ids" nolabel="1"/>
                     </group>
                 </sheet>
             </form>
@@ -263,37 +40,51 @@
     <record id="view_academy_tutoring_tree" model="ir.ui.view">
         <field name="name">academy.tutoring.tree</field>
         <field name="model">academy.tutoring</field>
-        <field name="type">list</field>
         <field name="arch" type="xml">
-            <list>
-                <field name="subject"/>
+            <list string="Tutorings">
+                <field name="name"/>
+                <field name="date"/>
                 <field name="student_id"/>
-                <field name="session_date"/>
             </list>
         </field>
     </record>
 
-    <record id="view_academy_tutoring_search" model="ir.ui.view">
-        <field name="name">academy.tutoring.search</field>
+    <record id="view_academy_tutoring_form" model="ir.ui.view">
+        <field name="name">academy.tutoring.form</field>
         <field name="model">academy.tutoring</field>
         <field name="arch" type="xml">
-            <search>
-                <field name="subject"/>
-                <field name="student_id"/>
-            </search>
+            <form string="Tutoring">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                        <field name="student_id"/>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 
+    <record id="action_academy_student" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">academy.student</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
     <record id="action_academy_tutoring" model="ir.actions.act_window">
-        <field name="name">Tutoring Sessions</field>
+        <field name="name">Tutorings</field>
         <field name="res_model">academy.tutoring</field>
         <field name="view_mode">list,form</field>
     </record>
 
     <menuitem id="menu_academy_root" name="Academy" sequence="10"/>
-    <menuitem id="menu_academy_teacher" name="Teachers" parent="menu_academy_root" action="action_academy_teacher" sequence="1"/>
-    <menuitem id="menu_academy_student" name="Students" parent="menu_academy_root" action="action_academy_student" sequence="2"/>
-    <menuitem id="menu_academy_course" name="Courses" parent="menu_academy_root" action="action_academy_course" sequence="3"/>
-    <menuitem id="menu_academy_enrollment" name="Enrollments" parent="menu_academy_root" action="action_academy_enrollment" sequence="4"/>
-    <menuitem id="menu_academy_tutoring" name="Tutoring" parent="menu_academy_root" action="action_academy_tutoring" sequence="5"/>
+
+    <menuitem id="menu_academy_students" name="Students"
+              parent="menu_academy_root"
+              action="action_academy_student"/>
+
+    <menuitem id="menu_academy_tutorings" name="Tutorings"
+              parent="menu_academy_root"
+              action="action_academy_tutoring"/>
 </odoo>

@@ -1,23 +1,22 @@
 {
-    'name': "Academy Management",
+    'name': 'Academy Management',
     'version': '1.0',
     'category': 'Education',
-    'summary': 'Módulo Gestor Academia',
+    'summary': 'Academy student and tutoring management',
     'description': """
         Academy Management Module
-        =========================
-        Manage students, courses, and enrollments.
+        ==========================
+        This module manages students and their tutoring sessions.
+        It implements a 1-N relationship between students and tutorings.
     """,
+    'author': 'Academy',
+    'website': 'https://www.example.com',
     'depends': ['base'],
     'data': [
         'security/res_groups.xml',
         'security/ir.model.access.csv',
-        'data/academy_data.xml',
         'views/academy_views.xml',
     ],
-    'installable': True,
-    'application': True,
+    'application': False,
     'auto_install': False,
-    'license': 'LGPL-3',
-    'author': 'Noel González',
 }

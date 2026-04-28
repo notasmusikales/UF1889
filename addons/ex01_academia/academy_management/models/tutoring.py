@@ -1,12 +1,16 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
-
-class Tutoring(models.Model):
+class AcademyTutoring(models.Model):
     _name = 'academy.tutoring'
-    _description = 'Tutoring Session'
+    _description = 'Academy Tutoring'
 
-    subject = fields.Char(string='Subject', required=True)
-    session_date = fields.Datetime(string='Date', default=fields.Datetime.now)
+    name = fields.Char(string='Subject', required=True)
+    date = fields.Date(string='Date', required=True, default=fields.Date.today)
     notes = fields.Text(string='Notes')
-    student_id = fields.Many2one('academy.student', string='Student', required=True)
-    active = fields.Boolean(string='Active', default=True)
+
+    student_id = fields.Many2one(
+        'academy.student',
+        string='Student',
+        required=True,
+        ondelete='cascade'
+    )

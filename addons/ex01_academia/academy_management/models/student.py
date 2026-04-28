@@ -1,36 +1,46 @@
 from odoo import models, fields, api
 
-
-class Student(models.Model):
+class AcademyStudent(models.Model):
     _name = 'academy.student'
-    _description = 'Student'
+    _description = 'Academy Student'
 
     name = fields.Char(string='Name', required=True)
     email = fields.Char(string='Email')
-    phone = fields.Char(string='Phone')
-    birth_date = fields.Date(string='Birth Date')
-    active = fields.Boolean(string='Active', default=True)
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('enrolled', 'Enrolled'),
+        ('graduated', 'Graduated'),
+        ('dropped', 'Dropped')
+    ], string='State', default='draft')
 
-    tutoring_ids = fields.One2many('academy.tutoring', 'student_id', string='Tutoring Sessions')
+    tutoring_ids = fields.One2many(
+        'academy.tutoring',
+        'student_id',
+        string='Tutorings'
+    )
 
-    tutoring_count = fields.Integer(string='Total Tutoring Sessions', compute='_compute_tutoring_count', store=True)
-    last_tutoring_date = fields.Datetime(string='Last Tutoring Session', compute='_compute_last_tutoring', store=True)
-    academic_state = fields.Selection([
-        ('good', 'Good'),
-        ('regular', 'Regular'),
-        ('poor', 'Needs Improvement'),
-    ], string='Academic Status', default='good')
+    tutoring_count = fields.Integer(
+        string='Tutoring Count',
+        compute='_compute_tutoring_count',
+        store=True
+    )
+
+    last_tutoring_date = fields.Date(
+        string='Last Tutoring Date',
+        compute='_compute_last_tutoring_date',
+        store=True
+    )
 
     @api.depends('tutoring_ids')
     def _compute_tutoring_count(self):
         for record in self:
             record.tutoring_count = len(record.tutoring_ids)
 
-    @api.depends('tutoring_ids.session_date')
-    def _compute_last_tutoring(self):
+    @api.depends('tutoring_ids.date')
+    def _compute_last_tutoring_date(self):
         for record in self:
             if record.tutoring_ids:
-                last_session = max(record.tutoring_ids.mapped('session_date'))
-                record.last_tutoring_date = last_session
+                dates = record.tutoring_ids.mapped('date')
+                record.last_tutoring_date = max(dates) if dates else False
             else:
                 record.last_tutoring_date = False
